@@ -659,6 +659,17 @@
                 min-height: 100vh;
             }
 
+            /* Header sticky e mais compacto no mobile para o conteúdo aparecer antes */
+            .header {
+                position: sticky;
+                top: 0;
+                padding: 1.25rem 1rem;
+            }
+
+            .name { font-size: 2.2rem; }
+            .title { font-size: 1.15rem; margin-bottom: 0.75rem; }
+            .contact-info { margin-top: 0.75rem; gap: 0.75rem; }
+
             /* Header sticky apenas no mobile */
             .header {
                 position: sticky;
@@ -1052,19 +1063,26 @@
 
     <script>
         // Animação de entrada dos elementos
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        // Criar um observer que considera a altura do header (especialmente no mobile sticky)
+        function createSectionObserver() {
+            const header = document.querySelector('.header');
+            const headerHeight = header ? header.offsetHeight : 0;
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const observerOptions = {
+                threshold: 0, // dispara assim que entra na viewport
+                // Expande o topo da viewport para disparar mais cedo (principalmente no mobile)
+                rootMargin: `${isMobile ? Math.max(24, Math.floor(headerHeight * 0.5)) : 64}px 0px -5% 0px`
+            };
+            return new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+        }
+        let observer = createSectionObserver();
 
         // Animação das barras de progresso das skills
         const animateSkillBars = () => {
@@ -1081,14 +1099,21 @@
         };
 
         // Observar seções para animação
-        document.querySelectorAll('.section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
+        const sections = document.querySelectorAll('.section');
+        sections.forEach((section, idx) => {
             section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(section);
+            if (idx === 0) {
+                // Primeira seção aparece imediatamente (evita tela vazia no mobile)
+                section.style.opacity = '1';
+                section.style.transform = 'translateY(0)';
+            } else {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                observer.observe(section);
+            }
             
             // Animar barras de skill quando a seção de competências aparecer
-            if (section.querySelector('.skills-grid')) {
+            if (section.querySelector('.skills-grid') || section.querySelector('.skills-compact')) {
                 const skillObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -1100,6 +1125,15 @@
                 
                 skillObserver.observe(section);
             }
+        });
+
+        // Recriar o observer em resize para ajustar rootMargin se a altura do header mudar
+        window.addEventListener('resize', () => {
+            observer.disconnect();
+            observer = createSectionObserver();
+            sections.forEach((section, idx) => {
+                if (idx > 0) observer.observe(section);
+            });
         });
 
         // Efeito de hover suave nos skill items
