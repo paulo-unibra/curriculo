@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paulo Ricardo - Desenvolvedor Fullstack</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .resume-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .profile-info {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .about {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-title i {
+            color: #667eea;
+        }
+
+        .skills-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .skill-level {
+            font-size: 0.8rem;
+            color: #667eea;
+            font-weight: 500;
+        }
+
+        .skill-progress {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 0.3rem;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .skill-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .skill-years {
+            font-size: 0.7rem;
+            color: #6c757d;
+            text-align: right;
+        }
+
+        .experience-item {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-period {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-location {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .job-description {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .integrations {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .integrations-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .integrations-list {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .integration-item {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .education-item {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 4px solid #28a745;
+        }
+
+        .degree {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .institution {
+            color: #28a745;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .period {
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+
+        .links-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .link-item {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: block;
+        }
+
+        .link-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .link-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-url {
+            color: #667eea;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .video-section {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e9ecef;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin-top: 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            z-index: 10;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 25px solid white;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            margin-left: 5px;
+        }
+
+        .play-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        .video-description {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .content {
+                padding: 2rem 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-circle:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+        <div class="floating-circle"></div>
+    </div>
+
+    <div class="container">
+        <div class="resume-card">
+            <header class="header">
+                <div class="profile-info">
+                    <h1 class="name">Paulo Ricardo</h1>
+                    <p class="title">Desenvolvedor Fullstack</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(81) 99629-8356</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>pr838908@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Jaboatão dos Guararapes, PE</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="content">
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-user"></i> Sobre Mim
+                    </h2>
+                    <div class="about">
+                        Sou um Full Stack Developer altamente motivado e apaixonado por criar soluções inovadoras e funcionais. Com experiência sólida em desenvolvimento web e habilidades completas tanto no frontend quanto no backend, estou empenhado em oferecer produtos e aplicações de alta qualidade. Minha experiência abrange a implementação de projetos desde a concepção até a entrega, utilizando tecnologias como JavaScript, React, Vue JS, PHP, HTML, CSS, Laravel e etc.
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-code"></i> Competências
+                    </h2>
+                    <div class="skills-grid">
+                        
+                        <!-- Frontend -->
+                        <div class="skill-category">
+                            <div class="category-title">
+                                <i class="fas fa-palette"></i>
+                                Frontend
+                            </div>
+                            <div class="skills-category-grid">
+                                <div class="skill-item" data-level="90">
+                                    <div class="skill-name">
+                                        <span>HTML/CSS</span>
+                                        <span class="skill-level">90%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="90"></div>
+                                    </div>
+                                    <div class="skill-years">5+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="90">
+                                    <div class="skill-name">
+                                        <span>JavaScript</span>
+                                        <span class="skill-level">90%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="90"></div>
+                                    </div>
+                                    <div class="skill-years">4+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="82">
+                                    <div class="skill-name">
+                                        <span>TypeScript</span>
+                                        <span class="skill-level">82%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="82"></div>
+                                    </div>
+                                    <div class="skill-years">2+ anos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backend -->
+                        <div class="skill-category">
+                            <div class="category-title">
+                                <i class="fas fa-server"></i>
+                                Backend
+                            </div>
+                            <div class="skills-category-grid">
+                                <div class="skill-item" data-level="88">
+                                    <div class="skill-name">
+                                        <span>PHP</span>
+                                        <span class="skill-level">88%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="88"></div>
+                                    </div>
+                                    <div class="skill-years">4+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="75">
+                                    <div class="skill-name">
+                                        <span>Node.js</span>
+                                        <span class="skill-level">75%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="75"></div>
+                                    </div>
+                                    <div class="skill-years">2+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="85">
+                                    <div class="skill-name">
+                                        <span>SQL</span>
+                                        <span class="skill-level">85%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="85"></div>
+                                    </div>
+                                    <div class="skill-years">3+ anos</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Frameworks -->
+                        <div class="skill-category">
+                            <div class="category-title">
+                                <i class="fas fa-layer-group"></i>
+                                Frameworks
+                            </div>
+                            <div class="skills-category-grid">
+                                <div class="skill-item" data-level="85">
+                                    <div class="skill-name">
+                                        <span>React JS</span>
+                                        <span class="skill-level">85%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="85"></div>
+                                    </div>
+                                    <div class="skill-years">3+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="78">
+                                    <div class="skill-name">
+                                        <span>React Native</span>
+                                        <span class="skill-level">78%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="78"></div>
+                                    </div>
+                                    <div class="skill-years">1+ ano</div>
+                                </div>
+
+                                <div class="skill-item" data-level="80">
+                                    <div class="skill-name">
+                                        <span>Vue JS</span>
+                                        <span class="skill-level">80%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="80"></div>
+                                    </div>
+                                    <div class="skill-years">2+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="85">
+                                    <div class="skill-name">
+                                        <span>Laravel</span>
+                                        <span class="skill-level">85%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="85"></div>
+                                    </div>
+                                    <div class="skill-years">3+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="70">
+                                    <div class="skill-name">
+                                        <span>Nest JS</span>
+                                        <span class="skill-level">70%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="70"></div>
+                                    </div>
+                                    <div class="skill-years">1 ano</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Outras -->
+                        <div class="skill-category">
+                            <div class="category-title">
+                                <i class="fas fa-tools"></i>
+                                Outras
+                            </div>
+                            <div class="skills-category-grid">
+                                <div class="skill-item" data-level="75">
+                                    <div class="skill-name">
+                                        <span>WordPress</span>
+                                        <span class="skill-level">75%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="75"></div>
+                                    </div>
+                                    <div class="skill-years">2+ anos</div>
+                                </div>
+
+                                <div class="skill-item" data-level="70">
+                                    <div class="skill-name">
+                                        <span>Git/GitHub</span>
+                                        <span class="skill-level">70%</span>
+                                    </div>
+                                    <div class="skill-progress">
+                                        <div class="skill-progress-bar" data-width="70"></div>
+                                    </div>
+                                    <div class="skill-years">3+ anos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-graduation-cap"></i> Formação
+                    </h2>
+                    <div class="education-item">
+                        <div class="degree">Tecnologia em Análise e Desenvolvimento de Sistemas</div>
+                        <div class="institution">UNIBRA</div>
+                        <div class="period">Julho 2024 - Julho 2027 (Cursando 2º período)</div>
+                        <div class="job-location">Rua Padre Inglês</div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-briefcase"></i> Experiência Profissional
+                    </h2>
+
+                    <div class="experience-item">
+                        <div class="company-name">BFC Securitizadora</div>
+                        <div class="job-period">Desde Agosto de 2024</div>
+                        <div class="job-location">Av. Eng. Domingos Ferreira, 2589 - SALA 1002 - Boa Viagem, Recife - PE</div>
+                        <div class="job-description">
+                            Atualmente desenvolvo aplicações web/mobile full-stack com JavaScript no frontend, utilizando os frameworks React JS e React Native. Também atuo na parte do back-end, integrando aplicações com o Node JS, através dos frameworks Adonis, Nest JS etc.
+                        </div>
+                        <div class="integrations">
+                            <div class="integrations-title">Integrações trabalhadas:</div>
+                            <div class="integrations-list">
+                                <span class="integration-item">Serviço B3</span>
+                                <span class="integration-item">CRM Bônus</span>
+                                <span class="integration-item">Sankhya</span>
+                                <span class="integration-item">Vadu</span>
+                                <span class="integration-item">Serasa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="company-name">Meets CRM</div>
+                        <div class="job-period">Desde Junho de 2022</div>
+                        <div class="job-location">R. Ribeiro de Brito, 930 - 1702 - Boa Viagem, Recife - PE</div>
+                        <div class="job-description">
+                            Atuei desenvolvendo aplicações web back-end na linguagem PHP orientado a objetos com estrutura MVC usando o framework Laravel e front-end utilizando React JS e suas bibliotecas, como TypeScript, Hot, entre outras.
+                        </div>
+                        <div class="integrations">
+                            <div class="integrations-title">Integrações trabalhadas:</div>
+                            <div class="integrations-list">
+                                <span class="integration-item">Sandguru</span>
+                                <span class="integration-item">Google Sheets</span>
+                                <span class="integration-item">Google Forms</span>
+                                <span class="integration-item">Lead Ads</span>
+                                <span class="integration-item">Conta Azul</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="company-name">Empiricus Research</div>
+                        <div class="job-period">Janeiro 2021 - Junho 2022</div>
+                        <div class="job-location">Av. Brigadeiro Faria Lima, 3.477 - Torre B - 10º Andar - São Paulo, SP</div>
+                        <div class="job-description">
+                            Atuei desenvolvendo aplicações web back-end na linguagem PHP orientado a objetos com estrutura MVC utilizando o framework Laravel e front-end utilizando Vue JS e suas bibliotecas.
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="company-name">3LM Informática</div>
+                        <div class="job-period">Fevereiro 2020 (Estagiário)</div>
+                        <div class="job-location">R. Dom Estevão Brioso, 227 - Boa Viagem, Recife - PE</div>
+                        <div class="job-description">
+                            Desenvolvi aplicações web back-end na linguagem PHP orientado a objetos com estrutura MVC e front-end utilizando React JS e suas bibliotecas, como TypeScript, Hot, entre outras.
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-video"></i> Entrevista em Destaque
+                    </h2>
+                    <div class="video-section">
+                        <div class="video-description">
+                            Confira minha entrevista onde compartilho experiências e conhecimentos sobre desenvolvimento full-stack e as tecnologias que utilizo no dia a dia.
+                        </div>
+                        <div class="video-container">
+                            <iframe 
+                                id="youtube-video"
+                                src="https://www.youtube.com/embed/Wk3rz_KPjr4?si=HPsGiAASgd8EfrAC&rel=0&showinfo=0&modestbranding=1&controls=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&autoplay=0" 
+                                title="YouTube video player"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen>
+                            </iframe>
+                            <div class="video-overlay" id="video-overlay">
+                                <div class="play-button" id="play-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h2 class="section-title">
+                        <i class="fas fa-link"></i> Links e Projetos
+                    </h2>
+                    <div class="links-section">
+                        <a href="https://youtu.be/pNSzDqM7xC4" target="_blank" class="link-item">
+                            <div class="link-title">
+                                <i class="fab fa-youtube"></i>
+                                Entrevista - YouTube
+                            </div>
+                            <div class="link-url">https://youtu.be/pNSzDqM7xC4</div>
+                        </a>
+
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:6958790388031635456/" target="_blank" class="link-item">
+                            <div class="link-title">
+                                <i class="fab fa-linkedin"></i>
+                                Entrevista - LinkedIn
+                            </div>
+                            <div class="link-url">linkedin.com/feed/update/urn:li:activity:6958790388031635456/</div>
+                        </a>
+
+                        <a href="https://bitbucket.org/dev2018web/workspace/repositories/" target="_blank" class="link-item">
+                            <div class="link-title">
+                                <i class="fab fa-bitbucket"></i>
+                                Repositórios de Projetos
+                            </div>
+                            <div class="link-url">bitbucket.org/dev2018web/workspace/repositories/</div>
+                        </a>
+
+                        <a href="https://bitbucket.org/dev2018web/workspace/repositories/" target="_blank" class="link-item">
+                            <div class="link-title">
+                                <i class="fab fa-linkedin"></i>
+                                Perfil LinkedIn
+                            </div>
+                            <div class="link-url">bitbucket.org/dev2018web/workspace/repositories/</div>
+                        </a>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Animação de entrada dos elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Animação das barras de progresso das skills
+        const animateSkillBars = () => {
+            const skillBars = document.querySelectorAll('.skill-progress-bar');
+            
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = '0%';
+                
+                setTimeout(() => {
+                    bar.style.width = width + '%';
+                }, 300);
+            });
+        };
+
+        // Observar seções para animação
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+            
+            // Animar barras de skill quando a seção de competências aparecer
+            if (section.querySelector('.skills-grid')) {
+                const skillObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(animateSkillBars, 500);
+                            skillObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                skillObserver.observe(section);
+            }
+        });
+
+        // Efeito de hover suave nos skill items
+        document.querySelectorAll('.skill-item').forEach(skill => {
+            skill.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            skill.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Efeito parallax sutil no header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Adicionar classe de animação quando a página carrega
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        const playButton = document.getElementById('play-button');
+        const videoOverlay = document.getElementById('video-overlay');
+        const videoIframe = document.getElementById('youtube-video');
+
+        if (playButton && videoOverlay && videoIframe) {
+            const baseVideoSrc = 'https://www.youtube.com/embed/Wk3rz_KPjr4?si=HPsGiAASgd8EfrAC&rel=0&showinfo=0&modestbranding=1&controls=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0';
+            videoIframe.src = baseVideoSrc;
+
+            videoOverlay.addEventListener('click', function() {
+                videoIframe.src = baseVideoSrc + '&autoplay=1';
+                videoOverlay.classList.add('hidden');
+                setTimeout(() => {
+                    videoOverlay.style.display = 'none';
+                }, 300);
+            });
+
+            // Efeito hover no botão
+            playButton.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+
+            playButton.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        }
+    </script>
+</body>
+</html>
