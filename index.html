@@ -52,7 +52,7 @@
             background: var(--surface);
             border-radius: 20px;
             box-shadow: var(--shadow);
-            overflow: hidden;
+            overflow: visible; /* permitir sticky do header */
             animation: fadeInUp 0.8s ease-out;
             border: 1px solid var(--border);
         }
@@ -76,6 +76,9 @@
             position: relative;
             overflow: hidden;
             border-bottom: 1px solid var(--border);
+            position: sticky; /* fixa no topo ao rolar */
+            top: -44px;
+            z-index: 1000;
         }
 
         .header::before {
@@ -628,7 +631,7 @@
 
         @media (max-width: 768px) {
             .container {
-                padding: 1rem;
+                padding: 0; /* ocupar toda a largura no mobile */
             }
 
             .name {
@@ -641,7 +644,13 @@
             }
 
             .content {
-                padding: 2rem 1.5rem;
+                padding: 1.25rem 1rem; /* ajusta padding interno no mobile */
+            }
+
+            /* Card ocupa a tela inteira no mobile */
+            .resume-card {
+                border-radius: 0;
+                min-height: 100vh;
             }
 
             .skills-grid {
@@ -1118,13 +1127,18 @@
         });
 
         // Efeito parallax sutil no header
-        window.addEventListener('scroll', () => {
+        // Parallax apenas em telas maiores para não conflitar com header sticky no mobile
+        const enableParallax = () => window.matchMedia('(min-width: 769px)').matches;
+        const onScrollParallax = () => {
+            if (!enableParallax()) return;
             const scrolled = window.pageYOffset;
             const header = document.querySelector('.header');
-            if (header) {
-                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            const inner = header ? header.querySelector('.profile-info') : null;
+            if (inner) {
+                inner.style.transform = `translateY(${scrolled * 0.2}px)`;
             }
-        });
+        };
+        window.addEventListener('scroll', onScrollParallax);
 
         // Adicionar classe de animação quando a página carrega
         window.addEventListener('load', () => {
