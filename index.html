@@ -124,11 +124,20 @@
             gap: 0.5rem;
             color: var(--text);
             transition: transform 0.3s ease, color 0.2s ease;
+            text-decoration: none;
         }
 
         .contact-item:hover {
             transform: translateY(-2px);
             color: var(--accent);
+        }
+
+        /* Destaque para o WhatsApp */
+        .contact-item.whatsapp:hover {
+            color: var(--accent-2);
+        }
+        .contact-item.whatsapp i {
+            color: var(--accent-2);
         }
 
         .content {
@@ -731,10 +740,10 @@
                     <p class="title">Desenvolvedor Fullstack</p>
                     
                     <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>(81) 99629-8356</span>
-                        </div>
+                        <a class="contact-item whatsapp" href="https://wa.me/5581996298356" target="_blank" rel="noopener noreferrer" aria-label="Abrir conversa no WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>WhatsApp: (81) 99629-8356</span>
+                        </a>
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
                             <span>pr838908@gmail.com</span>
