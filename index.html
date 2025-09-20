@@ -143,6 +143,14 @@
             color: var(--accent-2);
         }
 
+        /* Destaque para o Gmail */
+        .contact-item.gmail:hover {
+            color: #EA4335; /* Gmail red */
+        }
+        .contact-item.gmail i {
+            color: #EA4335; /* Gmail red */
+        }
+
         .content {
             padding: 3rem 2rem;
         }
@@ -753,10 +761,10 @@
                             <i class="fa-brands fa-whatsapp"></i>
                             <span>WhatsApp: (81) 99629-8356</span>
                         </a>
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>pr838908@gmail.com</span>
-                        </div>
+                        <a class="contact-item gmail" href="mailto:pr838908@gmail.com" aria-label="Enviar e-mail">
+                            <i class="fa-brands fa-google"></i>
+                            <span>Gmail: pr838908@gmail.com</span>
+                        </a>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>Jaboatão dos Guararapes, PE</span>
