@@ -149,6 +149,46 @@
             color: #EA4335; /* Gmail red */
         }
 
+        /* Language toggle button */
+        .language-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 100;
+        }
+
+        .language-toggle:hover {
+            transform: translateY(-2px);
+            background: var(--surface-2);
+            border-color: var(--accent);
+        }
+
+        .language-toggle i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .language-toggle {
+                top: 0.75rem;
+                right: 0.75rem;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.85rem;
+            }
+        }
+
         .content {
             padding: 3rem 2rem;
         }
@@ -767,22 +807,26 @@
     <div class="container">
         <div class="resume-card">
             <header class="header">
+                <button class="language-toggle" id="language-toggle" aria-label="Toggle language">
+                    <i class="fas fa-globe"></i>
+                    <span id="current-lang">PT</span>
+                </button>
                 <div class="profile-info">
                     <h1 class="name">Paulo Ricardo</h1>
-                    <p class="title">Desenvolvedor Fullstack</p>
+                    <p class="title" data-i18n="job-title">Desenvolvedor Fullstack</p>
                     
                     <div class="contact-info">
-                        <a class="contact-item whatsapp" href="https://wa.me/5581996298356" target="_blank" rel="noopener noreferrer" aria-label="Abrir conversa no WhatsApp">
+                        <a class="contact-item whatsapp" href="https://wa.me/5581996298356" target="_blank" rel="noopener noreferrer" aria-label="Open WhatsApp chat">
                             <i class="fa-brands fa-whatsapp"></i>
-                            <span>WhatsApp: (81) 99629-8356</span>
+                            <span data-i18n="contact-whatsapp">WhatsApp: (81) 99629-8356</span>
                         </a>
-                        <a class="contact-item gmail" href="mailto:prga@discente.ifpe.edu.br" aria-label="Enviar e-mail">
+                        <a class="contact-item gmail" href="mailto:prga@discente.ifpe.edu.br" aria-label="Send email">
                             <i class="fa-brands fa-google"></i>
-                            <span>Gmail: pr838908@gmail.com</span>
+                            <span data-i18n="contact-email">Gmail: pr838908@gmail.com</span>
                         </a>
                         <div class="contact-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Jaboatão dos Guararapes, PE</span>
+                            <span data-i18n="contact-location">Jaboatão dos Guararapes, PE</span>
                         </div>
                     </div>
                 </div>
@@ -791,16 +835,16 @@
             <main class="content">
                 <section class="section">
                     <h2 class="section-title">
-                        <i class="fas fa-user"></i> Sobre Mim
+                        <i class="fas fa-user"></i> <span data-i18n="section-about">Sobre Mim</span>
                     </h2>
-                    <div class="about">
+                    <div class="about" data-i18n="about-text">
                         Sou um Full Stack Developer altamente motivado e apaixonado por criar soluções inovadoras e funcionais. Com experiência sólida em desenvolvimento web e habilidades completas tanto no frontend quanto no backend, estou empenhado em oferecer produtos e aplicações de alta qualidade. Minha experiência abrange a implementação de projetos desde a concepção até a entrega, utilizando tecnologias como JavaScript, React, Vue JS, PHP, HTML, CSS, Laravel e etc.
                     </div>
                 </section>
 
                 <section class="section">
                     <h2 class="section-title">
-                        <i class="fas fa-code"></i> Competências
+                        <i class="fas fa-code"></i> <span data-i18n="section-skills">Competências</span>
                     </h2>
                     <div class="skills-compact">
                         <div class="skills-row">
@@ -858,27 +902,27 @@
 
                 <section class="section">
                     <h2 class="section-title">
-                        <i class="fas fa-graduation-cap"></i> Formação
+                        <i class="fas fa-graduation-cap"></i> <span data-i18n="section-education">Formação</span>
                     </h2>
                     <div class="education-item">
-                        <div class="degree">Tecnologia em Análise e Desenvolvimento de Sistemas</div>
+                        <div class="degree" data-i18n="education-degree">Tecnologia em Análise e Desenvolvimento de Sistemas</div>
                         <div class="institution">UNIBRA</div>
-                        <div class="period">Julho 2024 - Julho 2027 (Cursando 2º período)</div>
+                        <div class="period" data-i18n="education-period">Julho 2024 - Julho 2027 (Cursando 2º período)</div>
                         <div class="job-location">Rua Padre Inglês</div>
                     </div>
                 </section>
 
                 <section class="section">
                     <h2 class="section-title">
-                        <i class="fas fa-briefcase"></i> Experiência Profissional
+                        <i class="fas fa-briefcase"></i> <span data-i18n="section-experience">Experiência Profissional</span>
                     </h2>
 
                     <div class="experience-item">
                         <div class="company-name">BFC Securitizadora</div>
-                        <div class="job-period">Desde Agosto de 2024</div>
+                        <div class="job-period" data-i18n="bfc-period">Desde Agosto de 2024</div>
                         <div class="job-location">Av. Eng. Domingos Ferreira, 2589 - SALA 1002 - Boa Viagem, Recife - PE</div>
                         <div class="job-description">
-                            <ul>
+                            <ul data-i18n-list="bfc-description">
                                 <li>Desenvolvimento full‑stack de aplicações web e mobile com React JS e React Native, do desenho à publicação.</li>
                                 <li>Criação e evolução de APIs e serviços no Node.js (Adonis e Nest JS), com autenticação JWT, versionamento e testes.</li>
                                 <li>Integrações com sistemas terceiros (B3, CRM Bônus, Sankhya, Vadu, Serasa), orquestrando webhooks, filas e rotinas agendadas.</li>
@@ -887,7 +931,7 @@
                             </ul>
                         </div>
                         <div class="integrations">
-                            <div class="integrations-title">Stack principal:</div>
+                            <div class="integrations-title" data-i18n="stack-label">Stack principal:</div>
                             <div class="integrations-list">
                                 <span class="integration-item">React JS</span>
                                 <span class="integration-item">React Native</span>
@@ -912,10 +956,10 @@
 
                     <div class="experience-item">
                         <div class="company-name">Meets CRM</div>
-                        <div class="job-period">Desde Junho de 2022</div>
+                        <div class="job-period" data-i18n="meets-period">Desde Junho de 2022</div>
                         <div class="job-location">R. Ribeiro de Brito, 930 - 1702 - Boa Viagem, Recife - PE</div>
                         <div class="job-description">
-                            <ul>
+                            <ul data-i18n-list="meets-description">
                                 <li>Back‑end em PHP com arquitetura MVC (Laravel e Zend Framework) para módulos de CRM (cadastros, funil, regras de negócio).</li>
                                 <li>Exposição de APIs REST, webhooks e integrações com plataformas externas (automação de fluxos, sincronização e notificações).</li>
                                 <li>Front‑end em React JS + TypeScript para dashboards e componentes reutilizáveis, com foco em UX e performance.</li>
@@ -948,10 +992,10 @@
 
                     <div class="experience-item">
                         <div class="company-name">Empiricus Research</div>
-                        <div class="job-period">Janeiro 2021 - Junho 2022</div>
+                        <div class="job-period" data-i18n="empiricus-period">Janeiro 2021 - Junho 2022</div>
                         <div class="job-location">Av. Brigadeiro Faria Lima, 3.477 - Torre B - 10º Andar - São Paulo, SP</div>
                         <div class="job-description">
-                            <ul>
+                            <ul data-i18n-list="empiricus-description">
                                 <li>Desenvolvimento back‑end com PHP (Laravel) e front‑end com Vue JS para produtos digitais de alto tráfego.</li>
                                 <li>Criação de serviços em Node.js/Nest JS para cenários específicos, complementando o ecossistema PHP.</li>
                                 <li>Integração com APIs internas/externas, autenticação, autorização e camadas de cache.</li>
@@ -973,10 +1017,10 @@
 
                     <div class="experience-item">
                         <div class="company-name">3LM Informática</div>
-                        <div class="job-period">Fevereiro 2020 (Estagiário)</div>
+                        <div class="job-period" data-i18n="3lm-period">Fevereiro 2020 (Estagiário)</div>
                         <div class="job-location">R. Dom Estevão Brioso, 227 - Boa Viagem, Recife - PE</div>
                         <div class="job-description">
-                            <ul>
+                            <ul data-i18n-list="3lm-description">
                                 <li>Apoio no desenvolvimento de features e correções em PHP (MVC) e React JS.</li>
                                 <li>Consumo de APIs REST, escrita de consultas SQL e criação de componentes básicos de interface.</li>
                                 <li>Prática de versionamento com Git, participação em code reviews e adoção de boas práticas.</li>
@@ -1021,7 +1065,7 @@
 
                 <section class="section">
                     <h2 class="section-title">
-                        <i class="fas fa-link"></i> Links e Projetos
+                        <i class="fas fa-link"></i> <span data-i18n="section-links">Links e Projetos</span>
                     </h2>
                     <div class="links-section">
                         <a href="https://youtu.be/pNSzDqM7xC4" target="_blank" class="link-item">
@@ -1347,6 +1391,167 @@
         // Também executar quando o window carregar para garantir
         window.addEventListener('load', function() {
             updateExperienceYears();
+        });
+
+        // ========== TRANSLATION SYSTEM ==========
+        const translations = {
+            'pt': {
+                'job-title': 'Desenvolvedor Fullstack',
+                'contact-whatsapp': 'WhatsApp: (81) 99629-8356',
+                'contact-email': 'Gmail: pr838908@gmail.com',
+                'contact-location': 'Jaboatão dos Guararapes, PE',
+                'section-about': 'Sobre Mim',
+                'about-text': 'Sou um Full Stack Developer altamente motivado e apaixonado por criar soluções inovadoras e funcionais. Com experiência sólida em desenvolvimento web e habilidades completas tanto no frontend quanto no backend, estou empenhado em oferecer produtos e aplicações de alta qualidade. Minha experiência abrange a implementação de projetos desde a concepção até a entrega, utilizando tecnologias como JavaScript, React, Vue JS, PHP, HTML, CSS, Laravel e etc.',
+                'section-skills': 'Competências',
+                'section-education': 'Formação',
+                'education-degree': 'Tecnologia em Análise e Desenvolvimento de Sistemas',
+                'education-period': 'Julho 2024 - Julho 2027 (Cursando 2º período)',
+                'section-experience': 'Experiência Profissional',
+                'bfc-period': 'Desde Agosto de 2024',
+                'bfc-description': [
+                    'Desenvolvimento full‑stack de aplicações web e mobile com React JS e React Native, do desenho à publicação.',
+                    'Criação e evolução de APIs e serviços no Node.js (Adonis e Nest JS), com autenticação JWT, versionamento e testes.',
+                    'Integrações com sistemas terceiros (B3, CRM Bônus, Sankhya, Vadu, Serasa), orquestrando webhooks, filas e rotinas agendadas.',
+                    'Modelagem e acesso a dados (SQL), otimização de consultas e instrumentação de logs/métricas para observabilidade básica.',
+                    'Colaboração com stakeholders, revisão de código e disseminação de boas práticas (Clean Code, SOLID, GitFlow).'
+                ],
+                'meets-period': 'Desde Junho de 2022',
+                'meets-description': [
+                    'Back‑end em PHP com arquitetura MVC (Laravel e Zend Framework) para módulos de CRM (cadastros, funil, regras de negócio).',
+                    'Exposição de APIs REST, webhooks e integrações com plataformas externas (automação de fluxos, sincronização e notificações).',
+                    'Front‑end em React JS + TypeScript para dashboards e componentes reutilizáveis, com foco em UX e performance.',
+                    'Migrações, seeders, filas (queues) e jobs agendados; documentação técnica e alinhamento com produto.',
+                    'Melhorias de performance e segurança (cache, validação, controle de acesso).'
+                ],
+                'empiricus-period': 'Janeiro 2021 - Junho 2022',
+                'empiricus-description': [
+                    'Desenvolvimento back‑end com PHP (Laravel) e front‑end com Vue JS para produtos digitais de alto tráfego.',
+                    'Criação de serviços em Node.js/Nest JS para cenários específicos, complementando o ecossistema PHP.',
+                    'Integração com APIs internas/externas, autenticação, autorização e camadas de cache.',
+                    'Refino de componentes, otimização de carregamento e melhoria da experiência do usuário.'
+                ],
+                '3lm-period': 'Fevereiro 2020 (Estagiário)',
+                '3lm-description': [
+                    'Apoio no desenvolvimento de features e correções em PHP (MVC) e React JS.',
+                    'Consumo de APIs REST, escrita de consultas SQL e criação de componentes básicos de interface.',
+                    'Prática de versionamento com Git, participação em code reviews e adoção de boas práticas.'
+                ],
+                'stack-label': 'Stack principal:',
+                'integrations-label': 'Integrações trabalhadas:',
+                'section-links': 'Links e Projetos',
+                'year-singular': 'ano',
+                'year-plural': 'anos'
+            },
+            'en': {
+                'job-title': 'Fullstack Developer',
+                'contact-whatsapp': 'WhatsApp: +55 (81) 99629-8356',
+                'contact-email': 'Gmail: pr838908@gmail.com',
+                'contact-location': 'Jaboatão dos Guararapes, PE, Brazil',
+                'section-about': 'About Me',
+                'about-text': 'I am a highly motivated Full Stack Developer passionate about creating innovative and functional solutions. With solid experience in web development and comprehensive skills in both frontend and backend, I am committed to delivering high-quality products and applications. My experience encompasses the implementation of projects from conception to delivery, using technologies such as JavaScript, React, Vue JS, PHP, HTML, CSS, Laravel, and more.',
+                'section-skills': 'Skills',
+                'section-education': 'Education',
+                'education-degree': 'Technology in Systems Analysis and Development',
+                'education-period': 'July 2024 - July 2027 (Currently in 2nd semester)',
+                'section-experience': 'Professional Experience',
+                'bfc-period': 'Since August 2024',
+                'bfc-description': [
+                    'Full‑stack development of web and mobile applications with React JS and React Native, from design to publication.',
+                    'Creation and evolution of APIs and services in Node.js (Adonis and Nest JS), with JWT authentication, versioning, and testing.',
+                    'Integrations with third‑party systems (B3, CRM Bônus, Sankhya, Vadu, Serasa), orchestrating webhooks, queues, and scheduled routines.',
+                    'Data modeling and access (SQL), query optimization, and instrumentation of logs/metrics for basic observability.',
+                    'Collaboration with stakeholders, code review, and dissemination of best practices (Clean Code, SOLID, GitFlow).'
+                ],
+                'meets-period': 'Since June 2022',
+                'meets-description': [
+                    'Back‑end in PHP with MVC architecture (Laravel and Zend Framework) for CRM modules (registrations, funnel, business rules).',
+                    'Exposure of REST APIs, webhooks, and integrations with external platforms (flow automation, synchronization, and notifications).',
+                    'Front‑end in React JS + TypeScript for dashboards and reusable components, focused on UX and performance.',
+                    'Migrations, seeders, queues, and scheduled jobs; technical documentation and alignment with product.',
+                    'Performance and security improvements (cache, validation, access control).'
+                ],
+                'empiricus-period': 'January 2021 - June 2022',
+                'empiricus-description': [
+                    'Back‑end development with PHP (Laravel) and front‑end with Vue JS for high‑traffic digital products.',
+                    'Creation of services in Node.js/Nest JS for specific scenarios, complementing the PHP ecosystem.',
+                    'Integration with internal/external APIs, authentication, authorization, and cache layers.',
+                    'Refinement of components, loading optimization, and improvement of user experience.'
+                ],
+                '3lm-period': 'February 2020 (Intern)',
+                '3lm-description': [
+                    'Support in developing features and fixes in PHP (MVC) and React JS.',
+                    'Consumption of REST APIs, writing SQL queries, and creation of basic interface components.',
+                    'Practice of versioning with Git, participation in code reviews, and adoption of best practices.'
+                ],
+                'stack-label': 'Main Stack:',
+                'integrations-label': 'Integrations worked:',
+                'section-links': 'Links and Projects',
+                'year-singular': 'year',
+                'year-plural': 'years'
+            }
+        };
+
+        // Get saved language or default to PT
+        let currentLang = localStorage.getItem('resume-lang') || 'pt';
+
+        // Function to translate page
+        function translatePage(lang) {
+            currentLang = lang;
+            localStorage.setItem('resume-lang', lang);
+
+            // Update language toggle button
+            document.getElementById('current-lang').textContent = lang.toUpperCase();
+
+            // Translate simple text elements
+            document.querySelectorAll('[data-i18n]').forEach(elem => {
+                const key = elem.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    elem.textContent = translations[lang][key];
+                }
+            });
+
+            // Translate list elements (ul with data-i18n-list)
+            document.querySelectorAll('[data-i18n-list]').forEach(ul => {
+                const key = ul.getAttribute('data-i18n-list');
+                if (translations[lang][key] && Array.isArray(translations[lang][key])) {
+                    const items = ul.querySelectorAll('li');
+                    translations[lang][key].forEach((text, index) => {
+                        if (items[index]) {
+                            items[index].textContent = text;
+                        }
+                    });
+                }
+            });
+
+            // Update experience years with correct language
+            updateExperienceYearsWithLang(lang);
+        }
+
+        // Update years with correct language
+        function updateExperienceYearsWithLang(lang) {
+            document.querySelectorAll('.skill-tag').forEach(skillTag => {
+                const skillName = skillTag.getAttribute('data-skill');
+                const smallElement = skillTag.querySelector('small');
+                
+                if (skillName && smallElement && experienceData[skillName]) {
+                    const years = calculateYearsOfExperience(experienceData[skillName].startYear);
+                    const yearText = years === 1 
+                        ? `1 ${translations[lang]['year-singular']}` 
+                        : `${years} ${translations[lang]['year-plural']}`;
+                    smallElement.textContent = yearText;
+                }
+            });
+        }
+
+        // Toggle language on button click
+        document.getElementById('language-toggle').addEventListener('click', function() {
+            const newLang = currentLang === 'pt' ? 'en' : 'pt';
+            translatePage(newLang);
+        });
+
+        // Initialize translation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            translatePage(currentLang);
         });
     </script>
 </body>
